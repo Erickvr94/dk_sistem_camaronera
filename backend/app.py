@@ -10,8 +10,8 @@ CORS(app)  # Permite conexiones desde Flutter
 def get_db():
     return mysql.connector.connect(
         host=os.environ.get("DB_HOST", "localhost"),
-        user=os.environ.get("DB_USER", "camaronero"),
-        password=os.environ.get("DB_PASSWORD", "camaronero123"),
+        user=os.environ.get("DB_USER", "admin"),
+        password=os.environ.get("DB_PASSWORD", "admin"),
         database=os.environ.get("DB_NAME", "camaronera01")
     )
 
