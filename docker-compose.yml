@@ -7,10 +7,10 @@ services:
     container_name: camaronera_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: camaronera01
       MYSQL_USER: admin
-      MYSQL_PASSWORD: admin123
+      MYSQL_PASSWORD: admin
     ports:
       - "3307:3306"
     volumes:
@@ -31,7 +31,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: admin
-      DB_PASSWORD: admin123
+      DB_PASSWORD: admin
       DB_NAME: camaronera01
     depends_on:
       db:
