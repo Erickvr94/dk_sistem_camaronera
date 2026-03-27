@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: camaronera_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: camaronera01
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  flask:
+    build: ./backend
+    container_name: camaronera_api
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: admin
+      DB_PASSWORD: admin123
+      DB_NAME: camaronera01
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
